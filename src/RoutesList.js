@@ -26,26 +26,28 @@ function RoutesList({ login, signup, currentUser }) {
     <div className="pt-5">
       <Routes>
         {!currentUser &&
-        <>
-          <Route path="/login"element={<LoginForm login={login} />} />
-          <Route path="/signup"element={<SignupForm signup={signup} />} />
-        </>
+          <>
+            <Route path="/login" element={<LoginForm login={login} />} />
+            <Route path="/signup" element={<SignupForm signup={signup} />} />
+          </>
         }
 
         {/* <Route path="/"element={<Homepage />} /> */}
 
         {currentUser &&
-        <>
-          <Route path="/users" element={<UserList />} />
-          <Route path="/friends" element={<FriendList />} />
-          <Route path="/user/:handle" element={<UserDetail />} />
-          <Route path="/profile" element={<ProfileForm />} />
-          <Route path="/messages" element={<MessageList />} />
+          <>
 
-        </>
-      }
+            <Route path="/findfriends" element={<UserList />} />
+            <Route path="/friends" element={<FriendList />} />
+            <Route path="/user/:id" element={<UserDetail />} />
+            <Route path="/profile/:id/edit" element={<ProfileForm />} />
+            <Route path="/messages" element={<MessageList />} />
+            <Route path="/settings" element={<Setting />} />
 
-        <Route path="*" element={<Navigate to="/" />}/>
+          </>
+        }
+
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );
