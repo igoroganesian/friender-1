@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import LoadingSpinner from "./common/LoadingSpinner";
-import Navigation from "./routes-nav/Navigation";
-import RoutesList from "./routes-nav/RoutesList";
+import Navigation from "./Navigation";
+import RoutesList from "./RoutesList";
 import decode from "jwt-decode";
 import FrienderApi from "./api/api";
+import UserContext from "./auth/UserContext";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -19,7 +21,7 @@ function App() {
       async function getCurrentUser() {
         if (token) {
           try {
-            let { email } = decode(token);
+            let { id } = decode(token);
             // put the token on the Api class so it can use it to call the API.
             FrienderApi.token = token;
             let currentUser = await FrienderApi.getUser(id);
@@ -42,7 +44,7 @@ function App() {
           });
         }
       }
-      getUser();
+      getCurrentUser();
     },
     [token]
   );
@@ -87,8 +89,10 @@ function App() {
       }}
     >
       <div className="App">
-        <Navigation logout={logout} />
-        <RoutesList currentUser={currentUser.data} login={login} signup={signup} />
+        <BrowserRouter>
+          <Navigation logout={logout} />
+          <RoutesList currentUser={currentUser.data} login={login} signup={signup} />
+        </BrowserRouter>
       </div>
     </UserContext.Provider>
   );

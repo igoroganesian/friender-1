@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import Alert from "../common/Alert";
-import FrienderApi from "../api/api";
-import UserContext from "../auth/UserContext";
+import Alert from "./common/Alert";
+import FrienderApi from "./api/api";
+import UserContext from "./auth/UserContext";
 import "./ProfileForm.css";
 
 // eslint-disable-next-line
-import useTimedMessage from "../hooks/useTimedMessage";
+// import useTimedMessage from "../hooks/useTimedMessage";
 
 /** Profile editing form.
  *

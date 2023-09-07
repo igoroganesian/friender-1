@@ -12,7 +12,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5001";
 
 class FrienderApi {
   // the token for interactive with the API will be stored here.
-  static token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NDEwNzM5NiwianRpIjoiZmFiMmI2MjAtYzYwZS00Zjk4LWI5OGUtMmJiZmRkNDJlM2M0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsN0BnbWFpbC5jb20iLCJuYmYiOjE2OTQxMDczOTYsImV4cCI6MTY5NDEwODI5Nn0.j9ljIAzA97XnEvNcQVljlP5AcBBTn6g6ZYFFgmSbwmo";
+  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NDEwNzM5NiwianRpIjoiZmFiMmI2MjAtYzYwZS00Zjk4LWI5OGUtMmJiZmRkNDJlM2M0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImVtYWlsN0BnbWFpbC5jb20iLCJuYmYiOjE2OTQxMDczOTYsImV4cCI6MTY5NDEwODI5Nn0.j9ljIAzA97XnEvNcQVljlP5AcBBTn6g6ZYFFgmSbwmo";
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
@@ -20,8 +20,8 @@ class FrienderApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${FrienderApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -54,6 +54,14 @@ class FrienderApi {
     let res = await this.request(`users/${id}/friends`);
     return res.friends;
   }
+
+  /** Send like to other user */
+
+  static async sendLike(id) {
+    let res = await this.request(`likes/${id}`);
+    return res;
+  }
+
 
 
   /** Get token for login from username, password. */

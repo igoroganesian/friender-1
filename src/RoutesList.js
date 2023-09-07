@@ -1,12 +1,14 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-// import Homepage from "../homepage/Homepage";
-// import CompanyList from "../companies/CompanyList";
-// import JobList from "../jobs/JobList";
-// import CompanyDetail from "../companies/CompanyDetail";
-import LoginForm from "../auth/LoginForm";
-import ProfileForm from "../profiles/ProfileForm";
-import SignupForm from "../auth/SignupForm";
+
+import LoginForm from "./auth/LoginForm";
+import ProfileForm from "./ProfileForm";
+import SignupForm from "./auth/SignupForm";
+import UserList from './UserList';
+import UserDetail from "./UserDetail";
+import FriendList from './FriendList';
+import MessageList from "./MessageList";
+import Setting from "./Setting";
 
 /** Site-wide routes.
  *

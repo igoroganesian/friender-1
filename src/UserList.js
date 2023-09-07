@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import FrienderApi from "../api/api";
-import LoadingSpinner from "../common/LoadingSpinner";
+import FrienderApi from "./api/api";
+import LoadingSpinner from "./common/LoadingSpinner";
+import UserDetail from "./UserDetail";
 
 /**
  *
@@ -22,8 +23,13 @@ function UserList() {
     console.debug("UserList useEffect showUserWhenIndexChanges");
   }, [currIndex]);
 
-  // check
-  function saveUserAsFriendAndGoNextUser();
+
+  async function sendLike(id) {
+    let users = await FrienderApi.sendLike(id);
+    setCurrIndex(currIndex + 1);
+  }
+
+
 
   /** Triggered by search form submit; reloads companies. */
   async function fetchUsers(name) {
@@ -35,21 +41,9 @@ function UserList() {
 
   return (
     <div className="CompanyList col-md-8 offset-md-2">
-      {users.length
-        ? (
-          <div className="CompanyList-list">
-            {/* {users.map((u, index) => {
 
-              if (currIndex === index) {
-                <UserDetail  />;
-              }
-
-
-            })} */}
-          </div>
-        ) : (
-          <p className="lead">Sorry, no results were found!</p>
-        )}
+      <UserDetail curUser={users[currIndex]} />
+      <button className="UserList-btn" onClick={() => sendLike(users[currIndex].id)}> V </button>
     </div>
   );
 }

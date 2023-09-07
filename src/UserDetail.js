@@ -1,9 +1,10 @@
 import React from 'react';
 
-function UserDetail() {
+function UserDetail({ user }) {
   return (
     <div>
-      UserDetail
+      <p>{user.id}</p>
+      <p>{user.name}</p>
     </div>
   );
 }
