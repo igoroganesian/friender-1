@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Alert from "../common/Alert";
+// import Alert from "../common/Alert";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +19,7 @@ function LoginForm({ login }) {
     email: "",
     password: "",
   });
-  const [formErrors, setFormErrors] = useState([]);
+  // const [formErrors, setFormErrors] = useState([]);
 
   // console.debug(
   //   "LoginForm",
@@ -38,7 +38,8 @@ function LoginForm({ login }) {
       await login(formData);
       navigate("/findfriends");
     } catch (err) {
-      setFormErrors(err);
+      // setFormErrors(err);
+      console.log(err);
     }
   }
 

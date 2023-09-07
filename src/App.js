@@ -12,11 +12,11 @@ function App() {
     data: null,
     infoLoaded: false
   });
-  const [token, setToken] = (FrienderApi.token);
+  const [token, setToken] = ('');
 
   useEffect(
     function loadUserInfo() {
-      console.debug("App useEffect loadUserInfo", "token=", token);
+      // console.debug("App useEffect loadUserInfo", "token=", token);
 
       async function getCurrentUser() {
         if (token) {
@@ -24,14 +24,14 @@ function App() {
             let { id } = decode(token);
             // put the token on the Api class so it can use it to call the API.
             FrienderApi.token = token;
-            let currentUser = await FrienderApi.getUser(id);
+            let fetchedUser = await FrienderApi.getUser(id);
 
             setCurrentUser({
               infoLoaded: true,
-              data: currentUser
+              data: fetchedUser
             });
           } catch (err) {
-            console.error("App loadUserInfo: problem loading", err);
+            // console.error("App loadUserInfo: problem loading", err);
             setCurrentUser({
               infoLoaded: true,
               data: null

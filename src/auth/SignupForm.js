@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Alert from "../common/Alert";
+// import Alert from "../common/Alert";
 import "./SignupForm.css";
 import { useNavigate } from "react-router-dom";
 
@@ -35,7 +35,7 @@ function SignupForm({ signup }) {
     location: "",
     image_url: ""
   });
-  const [formErrors, setFormErrors] = useState([]);
+  // const [formErrors, setFormErrors] = useState([]);
 
   // console.debug(
   //   "SignupForm",
@@ -49,12 +49,14 @@ function SignupForm({ signup }) {
    * Calls login func prop and, if not successful, sets errors.
    */
   async function handleSubmit(evt) {
+    console.log('submit in signup form');
     evt.preventDefault();
     try {
       await signup(formData);
       navigate("/findfriends");
     } catch (err) {
-      setFormErrors(err);
+      // setFormErrors(err);
+      console.log(err);
     }
   }
 
@@ -62,7 +64,7 @@ function SignupForm({ signup }) {
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData(data => ({ ...data, [name]: value }));
-  }
+  };
 
 
 

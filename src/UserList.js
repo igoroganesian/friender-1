@@ -25,7 +25,7 @@ function UserList() {
 
 
   async function sendLike(id) {
-    let users = await FrienderApi.sendLike(id);
+    await FrienderApi.sendLike(id);
     setCurrIndex(currIndex + 1);
   }
 
