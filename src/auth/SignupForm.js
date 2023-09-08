@@ -25,7 +25,7 @@ import { useNavigate } from "react-router-dom";
 
 function SignupForm({ signup }) {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [regularFormData, setRegularFormData] = useState({
     username: "",
     password: "",
     bio: "",
@@ -33,9 +33,10 @@ function SignupForm({ signup }) {
     interests: "",
     email: "",
     location: "",
-    image_url: ""
   });
   // const [formErrors, setFormErrors] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+  console.log('state selectedImage', selectedImage);
 
   // console.debug(
   //   "SignupForm",
@@ -52,7 +53,60 @@ function SignupForm({ signup }) {
     console.log('submit in signup form');
     evt.preventDefault();
     try {
-      console.log("formData: ", formData);
+
+      // Create an object of formData
+      const formData = new FormData();
+
+      // // Update the formData object
+      formData.append(
+        "image",
+        selectedImage
+      );
+
+      console.log('state selectedImage in submit', selectedImage);
+
+      formData.append(
+        "email",
+        regularFormData.email
+      );
+      formData.append(
+        "password",
+        regularFormData.password
+      );
+      formData.append(
+        "bio",
+        regularFormData.bio
+      );
+      formData.append(
+        "name",
+        regularFormData.name
+      );
+      formData.append(
+        "interests",
+        regularFormData.interests
+      );
+      formData.append(
+        "hobbies",
+        regularFormData.hobbies
+      );
+      formData.append(
+        "image_url",
+        regularFormData.image_url
+      );
+      formData.append(
+        "location",
+        regularFormData.location
+      );
+
+      // for (var key of formData.entries()) {
+      //   console.log(key[0] + ', ' + key[1]);
+      // }
+
+      // Details of the uploaded file
+      // console.log('selected image', selectedImage);
+
+
+      console.log("other form data(regular form data): ", regularFormData);
       await signup(formData);
       navigate("/findfriends");
     } catch (err) {
@@ -64,14 +118,14 @@ function SignupForm({ signup }) {
   /** Update form data field */
   function handleChange(evt) {
     const { name, value } = evt.target;
-    setFormData(data => ({ ...data, [name]: value }));
+    setRegularFormData(data => ({ ...data, [name]: value }));
   };
 
-
-
-
-  //             location,
-  //             image_url=DEFAULT_IMAGE_URL
+  function handleImageChange(evt) {
+    console.log('in signup form image from evt.target.files', evt.target.files);
+    console.log('state selectedImage in handle change', selectedImage);
+    setSelectedImage(evt.target.files[0]);
+  };
 
   return (
     <div className="SignupForm">
@@ -79,13 +133,13 @@ function SignupForm({ signup }) {
         <h2 className="mb-3">Sign Up</h2>
         <div className="card">
           <div className="card-body">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
               <div className="mb-3">
                 <label className="form-label">Name</label>
                 <input
                   name="username"
                   className="form-control"
-                  value={formData.username}
+                  value={regularFormData.username}
                   onChange={handleChange}
                 />
               </div>
@@ -95,7 +149,7 @@ function SignupForm({ signup }) {
                   type="password"
                   name="password"
                   className="form-control"
-                  value={formData.password}
+                  value={regularFormData.password}
                   onChange={handleChange}
                 />
               </div>
@@ -105,7 +159,7 @@ function SignupForm({ signup }) {
                 <input
                   name="hobbies"
                   className="form-control"
-                  value={formData.hobbies}
+                  value={regularFormData.hobbies}
                   onChange={handleChange}
                 />
               </div>
@@ -114,7 +168,7 @@ function SignupForm({ signup }) {
                 <input
                   name="interests"
                   className="form-control"
-                  value={formData.interests}
+                  value={regularFormData.interests}
                   onChange={handleChange}
                 />
               </div>
@@ -124,7 +178,7 @@ function SignupForm({ signup }) {
                   type="email"
                   name="email"
                   className="form-control"
-                  value={formData.email}
+                  value={regularFormData.email}
                   onChange={handleChange}
                 />
               </div>
@@ -133,7 +187,7 @@ function SignupForm({ signup }) {
                 <input
                   name="bio"
                   className="form-control"
-                  value={formData.bio}
+                  value={regularFormData.bio}
                   onChange={handleChange}
                 />
               </div>
@@ -142,7 +196,7 @@ function SignupForm({ signup }) {
                 <input
                   name="location"
                   className="form-control"
-                  value={formData.location}
+                  value={regularFormData.location}
                   onChange={handleChange}
                 />
               </div>
@@ -152,8 +206,18 @@ function SignupForm({ signup }) {
 
                   name="image_url"
                   className="form-control"
-                  value={formData.image_url}
+                  value={regularFormData.image_url}
                   onChange={handleChange}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Upload Image</label>
+                <input
+                  type='file'
+                  name="image"
+                  className="form-control"
+                  onChange={handleImageChange}
                 />
               </div>
 

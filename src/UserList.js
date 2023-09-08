@@ -23,27 +23,26 @@ function UserList() {
     console.debug("UserList useEffect showUserWhenIndexChanges");
   }, [currIndex]);
 
+  // haven't tested yet
+  // async function sendLike(id) {
+  //   await FrienderApi.sendLike(id);
+  //   setCurrIndex(currIndex + 1);
+  // }
 
-  async function sendLike(id) {
-    await FrienderApi.sendLike(id);
-    setCurrIndex(currIndex + 1);
-  }
 
-
-
-  /** Triggered by search form submit; reloads companies. */
-  async function fetchUsers(name) {
-    let users = await FrienderApi.getUsers(name);
+  async function fetchUsers() {
+    let users = await FrienderApi.getUsers();
+    console.log('in UserList users', users);
     setUsers(users);
   }
 
   if (!users) return <LoadingSpinner />;
-
+  let currSeenUser = users[currIndex];
   return (
     <div className="CompanyList col-md-8 offset-md-2">
 
-      <UserDetail curUser={users[currIndex]} />
-      <button className="UserList-btn" onClick={() => sendLike(users[currIndex].id)}> V </button>
+      <UserDetail currSeenUser={currSeenUser} />
+      {/* <button className="UserList-btn" onClick={() => sendLike(users[currIndex].id)}> V </button> */}
     </div>
   );
 }

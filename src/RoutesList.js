@@ -1,14 +1,15 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import Home from "./Home";
 import LoginForm from "./auth/LoginForm";
-import ProfileForm from "./ProfileForm";
+// import ProfileForm from "./ProfileForm";
 import SignupForm from "./auth/SignupForm";
 import UserList from './UserList';
-import UserDetail from "./UserDetail";
-import FriendList from './FriendList';
-import MessageList from "./MessageList";
-import Setting from "./Setting";
+// import UserDetail from "./UserDetail";
+// import FriendList from './FriendList';
+// import MessageList from "./MessageList";
+// import Setting from "./Setting";
 
 /** Site-wide routes.
  *
@@ -34,9 +35,11 @@ function RoutesList({ login, signup, currentUser }) {
           </>
         }
 
-        {/* <Route path="/"element={<Homepage />} /> */}
 
-        {currentUser &&
+        <Route path="/" element={<Home />} />
+        <Route path="/findfriends" element={<UserList />} />
+
+        {/* {currentUser &&
           <>
 
             <Route path="/findfriends" element={<UserList />} />
@@ -47,7 +50,7 @@ function RoutesList({ login, signup, currentUser }) {
             <Route path="/settings" element={<Setting />} />
 
           </>
-        }
+        } */}
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -18,9 +18,12 @@ class FrienderApi {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
+
+    //TODO:  'Content-Type': 'application/x-www-form-urlencoded' works too!
     const headers = {
       Authorization: `Bearer ${FrienderApi.token}`,
-      'Content-Type': 'application/json' };
+      'Content-Type': 'multipart/form-data'
+    };
     const params = (method === "get")
       ? data
       : {};
@@ -39,7 +42,8 @@ class FrienderApi {
   /** Get all users */
 
   static async getUsers() {
-    let res = await this.request(`users/`);
+    //FIXME: can't have users/ or /users or /users/
+    let res = await this.request(`users`);
     return res.users;
   }
 
@@ -70,7 +74,8 @@ class FrienderApi {
 
   static async login(data) {
     let res = await this.request(`/login`, data, "post");
-    return res.token;
+    //TODO: res.token => res.access_token (we set this in flask)
+    return res.access_token;
   }
 
   /** Signup for site. */
@@ -79,7 +84,8 @@ class FrienderApi {
     console.log(`in Api signup, data: ${data}`);
     let res = await this.request(`/signup`, data, "post");
     console.log(`in Api signup, res: ${res}`);
-    return res.token;
+    //TODO: res.token => res.access_token (we set this in flask)
+    return res.access_token;
   }
 
   /** Save user profile page. */
