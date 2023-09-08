@@ -65,6 +65,7 @@ function App() {
   * Make sure you await this function to see if any error happens.
   */
   async function signup(signupData) {
+    console.log(`in App signup, signupData: ${signupData}`);
     let token = await FrienderApi.signup(signupData);
     setToken(token);
   }

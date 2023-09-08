@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 function SignupForm({ signup }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     password: "",
     bio: "",
     hobbies: "",
@@ -52,6 +52,7 @@ function SignupForm({ signup }) {
     console.log('submit in signup form');
     evt.preventDefault();
     try {
+      console.log("formData: ", formData);
       await signup(formData);
       navigate("/findfriends");
     } catch (err) {
@@ -82,9 +83,9 @@ function SignupForm({ signup }) {
               <div className="mb-3">
                 <label className="form-label">Name</label>
                 <input
-                  name="name"
+                  name="username"
                   className="form-control"
-                  value={formData.name}
+                  value={formData.username}
                   onChange={handleChange}
                 />
               </div>

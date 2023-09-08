@@ -18,7 +18,9 @@ class FrienderApi {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = { Authorization: `Bearer ${FrienderApi.token}` };
+    const headers = {
+      Authorization: `Bearer ${FrienderApi.token}`,
+      'Content-Type': 'application/json' };
     const params = (method === "get")
       ? data
       : {};
@@ -74,7 +76,9 @@ class FrienderApi {
   /** Signup for site. */
 
   static async signup(data) {
-    let res = await this.request(`signup`, data, "post");
+    console.log(`in Api signup, data: ${data}`);
+    let res = await this.request(`/signup`, data, "post");
+    console.log(`in Api signup, res: ${res}`);
     return res.token;
   }
 
